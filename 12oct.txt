@@ -1,0 +1,39 @@
+/*The structure of the Binary Tree Node  is
+struct Node
+{
+  char data;
+  struct Node* left;
+  struct Node* right;
+};*/
+
+class Solution {
+  public:
+    /*This function returns true if the tree contains 
+    a duplicate subtree of size 2 or more else returns false*/
+    string solve(Node* root,unordered_map<string,int>&mp){
+        if(!root) {
+            return "#";
+        }
+        string s="";
+        if(!root->left and !root->right){
+            s+=to_string(root->data);
+            return s;
+        }
+        s+=to_string(root->data);
+        s+="$";
+        s+= solve(root->left,mp);
+        s+= solve(root->right,mp);
+        
+        mp[s]++;
+        return s;
+    }
+    int dupSub(Node *root) {
+         // code here
+         unordered_map<string ,int>mp;
+         solve(root,mp);
+         for(auto it : mp){
+             if(it.second >= 2) return true;
+         }
+         return false;
+    }
+};
