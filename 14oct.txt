@@ -1,0 +1,29 @@
+
+
+class Solution
+{
+    public:
+    unordered_map<int,int>mp;
+    void solve(Node* root) {
+        if(root == NULL) {
+            return;
+        }
+        mp[root->data]++;
+        solve(root->left);
+        solve(root->right);
+    }
+    vector <int> findCommon(Node *root1, Node *root2)
+    {
+        vector<int>ans;
+        solve(root1);
+        solve(root2);
+        for(auto x: mp) {
+            if(x.second >=2) {
+                ans.push_back(x.first);
+            }
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};
+
