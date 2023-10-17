@@ -1,0 +1,48 @@
+// Back-end complete function Template for C++
+
+class Solution{
+public:
+    void dfs(int node, vector<int> adj[], vector<int> &vis,vector<vector<int>> &ans ,vector<int>&v){
+        vis[node] = 1;
+         v.push_back(node);
+        for(auto it: adj[node]){
+             
+            if(vis[it] == 0){
+                // res.push_back(it);
+                dfs(it, adj, vis,ans,v);
+            }
+            
+        }
+       
+    }
+    vector<vector<int>> transitiveClosure(int N, vector<vector<int>> graph)
+    {
+        // code here
+        vector<int> adj[N];
+        for(int i=0; i<N; i++){
+            for(int j=0; j<N; j++){
+                if(graph[i][j] == 1){
+                    adj[i].push_back(j);
+                }
+            }
+        }
+        
+        vector<vector<int>> ans;
+        
+        for(int i=0; i<N; i++){
+            vector<int> vis(N,0);
+            vector<int>v;
+            dfs(i,adj,vis,ans ,v);
+             ans.push_back(v);
+        }
+        for(int i=0; i<ans.size(); i++){
+            vector<int> temp = ans[i];
+            for(int j=0; j<temp.size(); j++){
+                graph[i][temp[j]] = 1;
+            }
+        }
+        
+        return graph;
+        
+    }
+};
