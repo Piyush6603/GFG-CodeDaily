@@ -1,0 +1,22 @@
+//User function Template for C++
+class Solution
+{
+public:
+/*
+Logic - Try to add all the divisors or you can say the multiple of i;
+At first we will try to create vector and assign 1 initially, 
+then we will traverse from 2 to N and try to add multiples of i let's say N=4 
+so in first iteration i=2 and then j=2 , divisor[2] = divisor[2] + 2;
+=> divisor[2]= 1(initially it was 1) + 2 so it becomes 3 which means 1 or 2 are the
+factors of 2 and after doing summation we get. Same we do for rest of the number as well.
+*/
+    long long sumOfDivisors(int N)
+    {
+        long long ans=0;
+        for(int i=1;i<=N;i++){
+            int q=(N/i);
+            ans+=  i*q;
+        }
+        return ans;
+    }
+};
