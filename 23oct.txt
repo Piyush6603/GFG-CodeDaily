@@ -1,0 +1,33 @@
+class Solution{
+		
+
+	public:
+	int maxSumIS(int arr[], int n)  
+	{  
+	    // make a dp array of size n; 
+	    int dp[n]; 
+	    
+	    // insert all the values of the arrary into dp arrary 
+	    
+	    for(int i =0; i<n; i++){
+	        dp[i] = arr[i]; 
+	    }
+	    
+	    for(int i= 0; i<n; i++){
+	        for(int j =0; j<i; j++){
+	            if(arr[j] < arr[i]){
+	                dp[i] = max(dp[i], dp[j]+arr[i]); 
+	            }
+	        }
+	    }
+	    
+	    int maxi = INT_MIN; //initialize with the min value 
+	    // traverse the dp arr and find the max value and return it to the answer 
+	    
+	    for(int i =0; i<n; i++){
+	        maxi = max(maxi,dp[i]); 
+	    }
+	    
+	    return maxi;// Your code goes here
+	}  
+};
