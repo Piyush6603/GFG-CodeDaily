@@ -1,0 +1,22 @@
+class Solution
+{
+
+  public:
+    
+    int minOperation(int n)
+    {
+        //code here.
+        int count = 0;
+        while(n){
+            if(n%2){
+                count++;
+                n=n-1;
+                continue;
+            }else{
+                count++;
+                n = n/2;
+            }
+        }
+        return count;
+    }
+};
