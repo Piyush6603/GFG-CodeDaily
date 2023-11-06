@@ -1,0 +1,37 @@
+// User function Template for C++
+
+class Solution{
+public:
+    vector<int> matrixSum(int n, int m, vector<vector<int>> mat, int q, vector<int> queries[])
+    {
+        // code here
+        vector<int>ans;
+        int c=0;
+        while(c<q)
+        {
+            int sum=0;
+            int i=queries[c][1];
+            int j=queries[c][2];
+            int hop=queries[c][0];
+            if(i-hop>=0) 
+                for(int k=j-hop;k<=j+hop;k++) 
+            if(k>=0 && k<m) 
+                sum+=mat[i-hop][k];
+            if(i+hop<n) 
+                for(int k=j-hop;k<=j+hop;k++) 
+            if(k>=0 && k<m) 
+                sum+=mat[i+hop][k];
+            if(j-hop>=0) 
+                for(int k=i-hop+1;k<i+hop;k++) 
+            if(k>=0 && k<n) 
+                sum+=mat[k][j-hop];
+            if(j+hop<m) 
+                for(int k=i-hop+1;k<i+hop;k++) 
+            if(k>=0 && k<n) 
+                sum+=mat[k][j+hop];
+            ans.push_back(sum);
+            c++;
+        }
+        return ans;
+    }
+};
