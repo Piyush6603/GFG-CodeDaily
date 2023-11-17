@@ -1,0 +1,32 @@
+class Solution {
+public:
+    Node* head = nullptr;
+    Node* end = nullptr;
+    void insert(int val) {
+        Node* newN = (struct Node*)malloc(sizeof(struct Node));
+        newN -> data = val;
+        newN -> right = nullptr;
+        newN -> left = nullptr;
+        if (head == nullptr) {
+            head = newN;
+            end = newN;
+        } else {
+            end->right = newN;
+            newN->left = end;
+            end = newN;
+        }
+    }
+    void inorder(Node* root) {
+        if (!root) return;
+        inorder(root->left);
+        insert(root->data);
+        inorder(root->right);
+    }
+
+    Node* bTreeToCList(Node* root) {
+        inorder(root);
+        head->left = end;
+        end->right = head;
+        return head;
+    }
+};
