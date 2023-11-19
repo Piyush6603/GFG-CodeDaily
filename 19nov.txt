@@ -1,0 +1,43 @@
+Node* findIntersection(Node* head1, Node* head2)
+
+{
+    vector<int> ans1, ans2;
+
+    // Populate ans1
+    Node* temp = head1;
+    while (temp) {
+        ans1.push_back(temp->data);
+        temp = temp->next;
+    }
+
+    // Populate ans2
+    temp = head2;
+    while (temp) 
+    {
+        ans2.push_back(temp->data);
+        temp = temp->next;
+    }
+
+    sort(ans1.begin(), ans1.end());
+    sort(ans2.begin(), ans2.end());
+
+    vector<int> ma;
+    // Find intersection
+    set_intersection(ans1.begin(), ans1.end(), ans2.begin(), ans2.end(), back_inserter(ma));
+
+    if (ma.empty()) 
+    {
+        return nullptr;  
+        // No intersection
+    }
+
+    // Create the result linked list
+    Node* finalans = new Node(ma[0]);
+    Node* curr = finalans;
+    for (int i = 1; i < ma.size(); i++) {
+        curr->next = new Node(ma[i]);
+        curr = curr->next;
+    }
+
+    return finalans;
+}
